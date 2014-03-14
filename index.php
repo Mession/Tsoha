@@ -1,8 +1,9 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<?php 
+  $index = "Hearthstone deck builder"; 
+?><!DOCTYPE HTML>
+<html>
+<head><title><?php echo $index; ?></title></head>
+<body>
+  <h1><?php echo $index; ?></h1>
+</body>
+</html>
