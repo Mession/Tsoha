@@ -1,0 +1,96 @@
+Hearthstone deck builder:
+
+Modelit:
+
+Card (tai vaihtoehtoisesti Spell ja Minion):
+	attribuutit: id, nimi, mana cost, class, description, attack (vain minion), health (vain minion)
+	crud: read kaikilla, create & update & destroy vain admin
+
+Deck:
+	attribuutit: id, nimi, omistaja (user), 30 korttia many-to-many yhteydellä
+	crud: read kaikilla, create rekisteröityneillä, update ja destroy omistajalla
+
+CardDeckJoinTable:
+	attribuutit: id, deck_id, card_id
+	crud: ei kellään read, create, update tai destroy (luodaan automaattisesti, kun deckkiin lisätään kortteja, tuhotaan automaattisesti, kun deckistä poistetaan kortteja)
+
+User:
+	attribuutit: id, nimi, salasana, admin (boolean arvo)
+	crud: create ja read kaikilla, update ja destroy vain omaan useriin
+(ehkä Class)
+
+
+
+Sivut:
+
+Navigaatiopalkissa (riippuen sisäänkirjautumisesta):
+
+Aloitussivu (index.php), jossa selitys sivun tarkoituksesta.
+
+Cards -sivu (cards.php), jossa näkyy lista korteista. Lisäksi adminille näkyy create card linkki cards/new.php sivulle.
+
+Decks -sivu (decks.php), jossa näkyy lista käyttäjien tekemistä pakoista. Lisäksi rekisteröityneille näkyy create deck linkki decks/new.php sivulle.
+
+Rekisteröityminen (signup.php), jossa voi luoda itselleen käyttäjätunnuksen.
+
+Kirjautuminen (login.php), jossa voi kirjautua sisään.
+
+Uloskirjautuminen (logout.php), jossa voi kirjautua ulos (käyttäjä clickkaa linkkiä, sessio resetataan ja user redirectataan etusivulle).
+
+
+
+Navigaatiopalkki ilman sisäänkirjautumista:
+Cards Decks Users Signup Login
+
+Navigaatiopalkki sisäänkirjautuneena:
+Cards Decks Users Username Logout
+
+
+
+Muut sivut:
+Card -sivu (cards/id.php missä id on numero), jossa näkyy yhden kortin tiedot (paitsi id). Lisäksi adminille näkyy update ja destroy linkit (destroy varmistaa, haluatko tuhota kortin ja tuhoaa jos vastaa kyllä (tämän jälkeen redirect kaikkien korttien sivulle), update redirectaa erilliselle sivulle cards/id/edit.php, jossa korttia voi updateta).
+
+
+Deck -sivu (decks/id.php), jossa näkyy yhden deckin tiedot (paitsi id). Lisäksi omistajalle näkyy update ja destroy linkit (destroy varmistaa, haluatko tuhota pakan ja tuhoaa jos vastaa kyllä (tämän jälkeen redirect kaikkien pakkojen sivulle), update redirectaa erilliselle sivulle decks/id/edit.php, jossa deckia voi updateta).
+
+
+User -sivu (users/id.php), jossa näkyy yhden userin nimi ja lista pakoista. Lisäksi userille itselleen näkyy update (muokkaa salasanaa, muita attribuutteja ei voi) ja destroy linkit (destroy varmistaa, haluatko varmasti tuhota käyttäjätilin, ja jos tuhotaan, resetoi session, poistaa käyttäjän, poistaa käyttäjän pakat), update redirectaa erilliselle sivulle, jossa voi vaihtaa salasanaa.
+
+
+
+
+Siis kaikki sivut:
+index.php
+cards.php
+	cards/id.php
+		cards/id/edit.php (admin only)
+		cards/id/destroy.php (admin only, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+	cards/new.php (admin only)
+decks.php
+	decks/id.php
+		decks/id/edit.php (owner only)
+		decks/id/destroy.php (owner only, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+	decks/new.php (registered users only)
+users.php
+	users/id.php
+		users/id/edit.php (owner only)
+		users/id/destroy.php (owner only, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+	users/new.php (sama kuin signup.php)
+signup.php (kirjautumaton käyttäjä)
+login.php (kirjautumaton käyttäjä)
+users/id.php (kirjautuneen käyttäjän oma sivu)
+logout.php (kirjautunut käyttäjä, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+
+
+
+Sivukartan lukemisohje:
+
+1. taso == tämä on navigaatiopalkissa
+	2. taso == 1. tasolta on linkki tänne
+		3. taso == 2. tasolta on linkki tänne
+			jne.
+suluissa aina lisätietoa sivusta
+
+
+
+

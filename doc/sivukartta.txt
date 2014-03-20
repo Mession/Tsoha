@@ -1,0 +1,34 @@
+Sivukartta:
+
+index.php
+cards.php
+	cards/id.php
+		cards/id/edit.php (admin only)
+		cards/id/destroy.php (admin only, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+	cards/new.php (admin only)
+decks.php
+	decks/id.php
+		decks/id/edit.php (owner only)
+		decks/id/destroy.php (owner only, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+	decks/new.php (registered users only)
+users.php
+	users/id.php
+		users/id/edit.php (owner only)
+		users/id/destroy.php (owner only, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+	users/new.php (sama kuin signup.php)
+signup.php (kirjautumaton käyttäjä)
+login.php (kirjautumaton käyttäjä)
+users/id.php (kirjautuneen käyttäjän oma sivu)
+logout.php (kirjautunut käyttäjä, tätä sivua ei ikinä renderöidä käyttäjälle, vaan sivun renderöinnin sijaan redirectataan)
+
+
+
+Sivukartan lukemisohje:
+
+1. taso == tämä on navigaatiopalkissa
+	2. taso == 1. tasolta on linkki tänne
+		3. taso == 2. tasolta on linkki tänne
+			jne.
+suluissa aina lisätietoa sivusta
+
+
