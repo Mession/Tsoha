@@ -7,7 +7,7 @@ Card (tai vaihtoehtoisesti Spell ja Minion):
 	crud: read kaikilla, create & update & destroy vain admin
 
 Deck:
-	attribuutit: id, nimi, omistaja (user), 30 korttia many-to-many yhteydellä
+	attribuutit: id, nimi, omistaja (user), class, 30 korttia many-to-many yhteydellä
 	crud: read kaikilla, create rekisteröityneillä, update ja destroy omistajalla
 
 CardDeckJoinTable:

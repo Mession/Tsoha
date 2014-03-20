@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit deck</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="../../../css/bootstrap.css" rel="stylesheet">
+        <link href="../../../css/bootstrap-theme.css" rel="stylesheet">
+        <link href="../../../css/main.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../cards.html">Cards</a></li>
+                    <li class="active"><a href="../../decks.html">Decks</a></li>
+                    <li><a href="../../users.html">Users</a></li>
+                    <li><a href="../../signup.html">Sign up</a></li>
+                    <li><a href="../../login.html">Log in</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <h1>Edit deck</h1>
+            <form action="new_deck_form.php" method="post">
+                Deck name: <input type="text" name="name"><br>
+                Class: <select name="classes">
+                        <option value="warrior">Warrior</option>
+                        <option value="paladin">Paladin</option>
+                        <option value="hunter">Hunter</option>
+                        <option value="shaman">Shaman</option>
+                        <option value="rogue">Rogue</option>
+                        <option value="druid">Druid</option>
+                        <option value="priest">Priest</option>
+                        <option value="warlock">Warlock</option>
+                        <option value="mage">Mage</option>
+                </select><br>
+                <input type="hidden" name="owner" value="Current_user">
+                <input type="hidden" name="id" value="Deck.id">
+                <input type="submit" value="Create deck">
+            </form>
+        </div>
+    </body>
+</html>

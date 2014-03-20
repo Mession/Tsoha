@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap-theme.css" rel="stylesheet">
+        <link href="../css/main.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cards.html">Cards</a></li>
+                    <li><a href="decks.html">Decks</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="signup.html">Sign up</a></li>
+                    <li class="active"><a href="login.html">Log in</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <h1>Login</h1>
+            <form action="login_form.php" method="post">
+                Username: <input type="text" name="username"><br>
+                Password: <input type="password" name="password"><br>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </body>
+</html>
