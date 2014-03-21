@@ -11,7 +11,7 @@ Deck:
 	crud: read kaikilla, create rekisteröityneillä, update ja destroy omistajalla
 
 CardDeckJoinTable:
-	attribuutit: id, deck_id, card_id
+	attribuutit: deck_id, card_id
 	crud: ei kellään read, create, update tai destroy (luodaan automaattisesti, kun deckkiin lisätään kortteja, tuhotaan automaattisesti, kun deckistä poistetaan kortteja)
 
 User:

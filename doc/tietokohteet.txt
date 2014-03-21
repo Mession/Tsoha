@@ -1,0 +1,45 @@
+Attribuutti		Arvojoukko			Kuvailu
+
+Tietokohde: User (huom! tietokannassa Userin nimi on Player, koska user olikin PostgreSQL:ssä varattu keyword)
+
+Name			Merkkijono, max. 20 merkkiä	Käyttäjän käyttäjänimi
+
+Password		Merkkijono, max. 20 merkkiä	Käyttäjän salasana
+
+Admin			boolean				Onko käyttäjä admin (true) vai ei
+
+Sivuston käyttäjällä voi olla monta pakkaa. Käyttäjällä ei ole pakko olla ollenkaan pakkoja. Jos käyttäjä poistaa käyttäjätilinsä, myös hänen pakkansa poistetaan.
+
+
+
+Tietokohde: Card
+
+Name			Merkkijono, max. 20 merkkiä	Kortin nimi
+
+Mana cost		Kokonaisluku			Paljonko manaa kuluu kortin pelaamiseen
+
+Class			Merkkijono, max. 15 merkkiä	Mihin luokkaan kortti kuuluu
+
+Description		Merkkijono, max. 255 merkkiä	Kortin kuvaus
+
+Attack			Kokonaisluku			Kortin hyökkäysarvo (loitsuilla ei ole tätä)
+
+Health			Kokonaisluku			Kortin health (loitsuilla ei ole tätä)
+
+Kortti voi kuulua useaan pakkaan. Kortti voi luokastaan riippuen kuulua vain tietynlaisiin pakkoihin (neutral kortit voivat kuulua mihin vaan pakkaan, mutta esim. mage kortit voivat kuulu vain mage-luokkaisiin pakkoihin).
+
+
+
+Tietokohde: Deck
+
+Name			Merkkijono, max. 20 merkkiä	Käyttäjän pakalle antama nimi
+
+Owner			Integer				Pakan tehneen käyttäjän id
+
+Class			Merkkijono, max. 15 merkkiä	Mihin luokkaan pakka kuuluu
+
+Pakan omistaa aina sen luonut käyttäjä. Jos käyttäjä poistaa käyttäjätilinsä, myös hänen tekemänsä pakat poistuvat järjestelmästä. Pakkaan kuuluu aina korkeintaan 30 korttia. Jos pakka poistetaan, siihen kuuluvat kortit jäävät yhä järjestelmään (sillä ne todennäköisesti kuuluvat jonkun muun pakkaan yhä, ja muutenkin niiden tulee poistua järjestelmästä vain, jos pelin tekijä Blizzard jossain päivityksessä poistaa kortin).
+
+
+
+
