@@ -22,25 +22,25 @@ values('Penan pakka', 1, 'Mage');
 insert into deck(name, owner, class)
 values('Warlock deck', 2, 'Warlock');
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(1, 1);
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(1, 1);
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(1, 2);
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(1, 2);
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(1, 4);
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(2, 3);
 
-insert into carddeckjointable(deck_id, card_id)
+insert into cardsindeck(deck_id, card_id)
 values(2, 4);
 
 

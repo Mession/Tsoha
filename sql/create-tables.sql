@@ -25,7 +25,7 @@ owner integer references player(id) on delete cascade on update cascade,
 class varchar(15)
 );
 
-CREATE TABLE carddeckjointable
+CREATE TABLE cardsindeck
 (
 id serial primary key,
 deck_id integer references deck(id) on delete cascade on update cascade,
