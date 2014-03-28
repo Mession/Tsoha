@@ -14,14 +14,28 @@ class User {
     $this->admin = $admin;
   }
   
-  public static function etsiKaikkiKayttajat() {
-        $sql = "SELECT id, name, password FROM player";
+  public static function findUserByNameAndPassword($username, $password) {
+        $sql = "SELECT id, name, password, admin FROM player where name = ? AND password = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($username, $password));
+
+        $tulos = $kysely->fetchObject();
+        if ($tulos == null) {
+            return null;
+        } else {
+            $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
+            return $user;
+        }
+    }
+
+    public static function findAllUsers() {
+        $sql = "SELECT id, name, password, admin FROM player";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $user = new User($tulos->id, $tulos->name, $tulos->password, false);
+            $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
 
             //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
             //Se vastaa melko suoraan ArrayList:in add-metodia.
@@ -31,15 +45,15 @@ class User {
     }
 
     /* Tähän gettereitä ja settereitä */
-    
+
     public function getId() {
         return $this->id;
     }
-    
+
     public function getName() {
         return $this->name;
     }
-    
+
     public function getPassword() {
         return $this->password;
     }

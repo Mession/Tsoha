@@ -10,12 +10,21 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/bootstrap-theme.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
-        <title></title>
+        <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+        <script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <title><?php echo $title ?></title>
     </head>
     <body>
-        <!-- Toteuta myöhemmin kaksi erillistä navbaria, toinen kirjautuneelle ja toinen muille
-        ja että navbarissa huomioidaan aktiivinen sivu html-demon tapaan -->
-        <?php require "navbar.php"; ?>
+        <?php if (isset($_SESSION["user"])): ?>
+            <?php require "loggedinnavbar.php"; ?>
+        <?php else: ?>
+            <?php require "navbar.php"; ?>
+        <?php endif; ?>
+        <?php if (!empty($data->error)): ?>
+            <div class="alert alert-danger"><?php echo $data->error; ?></div>
+        <?php endif; ?>
         <?php require $page; ?>
     </body>
 </html>

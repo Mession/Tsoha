@@ -1,3 +1,5 @@
 <?php
+
 require_once "libs/common.php";
-    show("views/decks.php");
+require_once "libs/models/deck.php";
+show("views/decks.php", "Decks", array());

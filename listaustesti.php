@@ -4,7 +4,7 @@ require_once "libs/models/user.php";
 require_once "libs/tietokantayhteys.php";
 
 //Lista asioista array-tietotyyppiin laitettuna:
-$lista = User::etsiKaikkiKayttajat();
+$lista = User::findAllUsers();
 ?><!DOCTYPE HTML>
 <html>
     <head>
