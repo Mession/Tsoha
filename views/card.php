@@ -1,8 +1,4 @@
-<?php
-$id = explode('=',$_SERVER['REQUEST_URI']);
-$id = $id[1];
-$card = Card::findCardById($id);
-?>
+<?php $card = $data->card; ?>
 <div class="container">
     <h1><?php echo $card->getName(); ?></h1>
     <p><?php echo $card->getClass(); echo ($card->getAttack() == 0 && $card->getHealth() == 0)? " spell":" minion";; ?></p>

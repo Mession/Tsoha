@@ -14,9 +14,14 @@
         <script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
         <script type="text/javascript" src="../js/bootstrap.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
-        <title><?php echo $title ?> | Hearthstone deck builder</title>
+        <?php if (isset($title)): ?>
+            <title><?php echo $title ?> | Hearthstone deck builder</title>
+        <?php else: ?>
+            <title>Hearthstone deck builder</title>
+        <?php endif; ?>
     </head>
     <body>
+        <?php require_once "libs/navbaractivetab.php"; ?>
         <?php if (isset($_SESSION["user"])): ?>
             <?php require "loggedinnavbar.php"; ?>
         <?php else: ?>

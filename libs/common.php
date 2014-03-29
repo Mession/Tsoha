@@ -10,6 +10,7 @@ function show($page, $title, $data = array()) {
 }
 
 function showOnlyIfLoggedIn($page, $title, $data = array()) {
+    $data = (object) $data;
     if (loggedIn()) {
         show($page, $title, array());
     } else {
