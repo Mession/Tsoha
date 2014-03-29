@@ -14,7 +14,7 @@
         <script type="text/javascript" src="../js/jquery-2.1.0.js"></script>
         <script type="text/javascript" src="../js/bootstrap.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
-        <title><?php echo $title ?></title>
+        <title><?php echo $title ?> | Hearthstone deck builder</title>
     </head>
     <body>
         <?php if (isset($_SESSION["user"])): ?>

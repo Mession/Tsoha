@@ -4,7 +4,7 @@ require_once "libs/common.php";
 require_once "libs/models/user.php";
 
 if (loggedIn()) {
-    show("views/index.php", "Hearthstone deck builder", array('error' => "You are logged in already"));
+    show("views/index.php", "Home", array('error' => "You are logged in already"));
 }
 
 $user = $_POST["username"];
@@ -27,6 +27,7 @@ if (isset($dbuser)) {
     $_SESSION["userid"] = $dbuser->getId(); 
     $_SESSION["name"] = $dbuser->getName();
     $_SESSION["admin"] = $dbuser->getAdmin();
+    $title = "Home";
     header('Location: index.php');
 } else {
     show("views/login.php", "Login", array('user' => $user, 'error' => "Username and password do not match"));
