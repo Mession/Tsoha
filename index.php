@@ -1,4 +1,4 @@
 <?php
 
 require_once "libs/common.php";
-show("views/index.php", "Home", array());
+header('Location: cards.php');

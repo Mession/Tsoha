@@ -9,6 +9,10 @@ function show($page, $title, $data = array()) {
     exit();
 }
 
+function redirect($page) {
+    header('Location: ' . $page);
+}
+
 function showOnlyIfLoggedIn($page, $title, $data = array()) {
     $data = (object) $data;
     if (loggedIn()) {

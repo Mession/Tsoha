@@ -1,6 +1,3 @@
-<?php
-$cards = Card::findAllCards();
-?>
 <div class="container">
     <h1>List of cards</h1>
     <table class="table table-striped">
@@ -11,7 +8,7 @@ $cards = Card::findAllCards();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($cards as $card): ?>
+            <?php foreach ($data->cards as $card): ?>
                 <tr>
                     <td><?php echo $card->getId(); ?></td>
                     <td>
@@ -22,3 +19,6 @@ $cards = Card::findAllCards();
         </tbody>
     </table>
 </div>
+<?php if (admin()): ?>
+<?php require_once 'views/newcard.php'; ?>
+<?php endif; ?>

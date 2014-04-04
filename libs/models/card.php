@@ -9,6 +9,7 @@ class Card {
     private $description;
     private $attack;
     private $health;
+    private $errors = array();
     
     public function __construct($id, $name, $manacost, $class, $description, $attack, $health) {
         $this->id = $id;
@@ -49,7 +50,7 @@ class Card {
     }
 
     public static function findAllCards() {
-        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card";
+        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY id";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -62,6 +63,37 @@ class Card {
             $tulokset[] = $card;
         }
         return $tulokset;
+    }
+    
+    public function insert() {
+        $sql = "INSERT INTO Card(name, manacost, class, description, attack, health) VALUES(?,?,?,?,?,?) RETURNING id";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        
+        $ok = $kysely->execute(array($this->getName(), $this->getManacost(), $this->getClass(), $this->getDescription(), $this->getAttack(), $this->getHealth()));
+        if ($ok) {
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
+    
+    public function update() {
+        $sql = "UPDATE Card SET name = ?, manacost = ?, class = ?, description = ?, attack = ?, health = ? WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getName(), $this->getManacost(), $this->getClass(), $this->getDescription(), $this->getAttack(), $this->getHealth(), $this->getId()));
+    }
+    
+    public function destroy() {
+        $sql = "DELETE from Card WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getId()));
+    }
+    
+    public function attributesCorrect() {
+        return empty($this->errors);
+    }
+    
+    public function getErrors() {
+        return $this->errors;
     }
     
     public function getId() {
@@ -94,10 +126,24 @@ class Card {
 
     public function setId($id) {
         $this->id = $id;
+        if (!is_numeric($id)) {
+            $this->errors['id'] = "Id should be a number";
+        } else if ($id <= 0) {
+            $this->errors['id'] = "Id should be greater than one";
+        } else if (!preg_match('/^\d+$/', $id)) {
+            $this->errors['id'] = "Id should be an integer";
+        } else {
+            unset($this->errors['id']);
+        }
     }
 
     public function setName($name) {
         $this->name = $name;
+        if (trim($this->name) == "") {
+            $this->errors['name'] = "Name cannot be blank";
+        } else {
+            unset($this->errors['name']);
+        }
     }
 
     public function setManacost($manacost) {

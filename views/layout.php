@@ -22,10 +22,14 @@
     </head>
     <body>
         <?php require_once "libs/navbaractivetab.php"; ?>
-        <?php if (isset($_SESSION["user"])): ?>
-            <?php require "loggedinnavbar.php"; ?>
-        <?php else: ?>
-            <?php require "navbar.php"; ?>
+        <?php require "navbar.php"; ?>
+        <?php if (!empty($_SESSION['error'])): ?>
+            <div class="alert alert-danger"><?php echo $_SESSION['error']; ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+        <?php if (!empty($_SESSION['notice'])): ?>
+            <div class="alert alert-success"><?php echo $_SESSION['notice']; ?></div>
+            <?php unset($_SESSION['notice']); ?>
         <?php endif; ?>
         <?php if (!empty($data->error)): ?>
             <div class="alert alert-danger"><?php echo $data->error; ?></div>

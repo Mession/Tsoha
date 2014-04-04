@@ -27,9 +27,23 @@ class User {
             return $user;
         }
     }
+    
+    public static function findUserById($id) {
+        $sql = "SELECT id, name, password, admin FROM player where id = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($id));
+
+        $tulos = $kysely->fetchObject();
+        if ($tulos == null) {
+            return null;
+        } else {
+            $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
+            return $user;
+        }
+    }
 
     public static function findAllUsers() {
-        $sql = "SELECT id, name, password, admin FROM player";
+        $sql = "SELECT id, name, password, admin FROM player ORDER BY id";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 

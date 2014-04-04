@@ -3,7 +3,11 @@
 require_once "libs/common.php";
 require_once "libs/models/card.php";
 
-$id = explode('=',$_SERVER['REQUEST_URI']);
-$id = $id[1];
+$id = (int)$_GET['id'];
 $card = Card::findCardById($id);
-show("views/card.php", "Card", array('card' => $card));
+if ($card == null) {
+    $_SESSION['error'] = "Card doesn't exist";
+    redirect("cards.php");
+} else {
+    show("views/card.php", "Card", array('card' => $card));
+}
