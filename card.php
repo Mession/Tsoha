@@ -9,5 +9,12 @@ if ($card == null) {
     $_SESSION['error'] = "Card doesn't exist";
     redirect("cards.php");
 } else {
-    show("views/card.php", "Card", array('card' => $card));
+    $weaponcheck = str_split($card->getDescription(), 6);
+    $isweapon = false;
+    $description = $card->getDescription();
+    if (($weaponcheck[0] == "Weapon")) {
+        $isweapon = true;
+        $description = substr($card->getDescription(), 8);
+    }
+    show("views/card.php", "Card", array('card' => $card, 'isweapon' => $isweapon, 'description' => $description));
 }
