@@ -36,7 +36,9 @@
                 $newcard->setManacost($manacost);
                 $newcard->setHealth($defense);
                 $newcard->setAttack($attack);
-                $newcard->insert();
+                if (Card::findCardByName($name) == null) {
+                    $newcard->insert();
+                }
                 print "<br><br>" . "---" . "<br><br>";
             }
         }

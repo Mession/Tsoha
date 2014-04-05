@@ -9,7 +9,7 @@ admin boolean
 CREATE TABLE card
 (
 id serial primary key,
-name varchar(20),
+name varchar(50),
 manacost integer,
 class varchar(15),
 description varchar(255),

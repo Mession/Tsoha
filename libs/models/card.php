@@ -92,7 +92,7 @@ class Card {
         $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY name";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
-
+        
         return $kysely->rowCount() == 0;
     }
     
