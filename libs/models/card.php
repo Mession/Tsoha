@@ -50,7 +50,7 @@ class Card {
     }
 
     public static function findAllCards() {
-        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY id";
+        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY name";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
