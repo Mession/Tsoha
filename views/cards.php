@@ -1,22 +1,4 @@
-<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
-<script>$(document).ready(function () {
-
-    (function ($) {
-
-        $('#filter').keyup(function () {
-
-            var rex = new RegExp($(this).val(), 'i');
-            $('.searchable tr').hide();
-            $('.searchable tr').filter(function () {
-                return rex.test($(this).text());
-            }).show();
-
-        })
-
-    }(jQuery));
-
-});
-</script>
+<script type="text/javascript" src="js/filter.js"></script>
 <div class="container">
     <h1>List of cards</h1>
     <div class="input-group" style="float:left">
