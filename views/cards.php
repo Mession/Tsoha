@@ -3,17 +3,17 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
+                <th>Class</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($data->cards as $card): ?>
                 <tr>
-                    <td><?php echo $card->getId(); ?></td>
                     <td>
                         <a href="card.php?id=<?php echo $card->getId(); ?>"><?php echo $card->getName(); ?></a>
                     </td>
+                    <td><?php echo $card->getClass(); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

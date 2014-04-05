@@ -23,29 +23,22 @@ insert into deck(name, owner, class)
 values('Warlock deck', 2, 'Warlock');
 
 insert into cardsindeck(deck_id, card_id)
-values(1, 1);
+values(1, 232);
 
 insert into cardsindeck(deck_id, card_id)
-values(1, 1);
+values(1, 232);
 
 insert into cardsindeck(deck_id, card_id)
-values(1, 2);
+values(1, 59);
 
 insert into cardsindeck(deck_id, card_id)
-values(1, 2);
+values(1, 59);
 
 insert into cardsindeck(deck_id, card_id)
-values(1, 4);
+values(1, 265);
 
 insert into cardsindeck(deck_id, card_id)
-values(2, 3);
+values(2, 180);
 
 insert into cardsindeck(deck_id, card_id)
-values(2, 4);
-
-
-
-
-
-
-
+values(2, 265);
