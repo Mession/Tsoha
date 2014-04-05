@@ -21,7 +21,7 @@
                 }
                 $attack;
                 $defense;
-                if ($cardx['attack'] == null || $cardx['defense'] == null) {
+                if ($cardx['attack'] == null && $cardx['defense'] == null) {
                     $attack = 0;
                     $defense = 0;
                 } else {

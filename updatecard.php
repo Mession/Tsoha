@@ -10,6 +10,16 @@ if (admin()) {
         redirect("cards.php");
     } else {
         $sent = $_POST["sent"];
+        $classes = array("Warrior", "Paladin", "Hunter", "Shaman", "Rogue", "Druid", "Priest", "Warlock", "Mage", "Neutral");
+        $selected = array();
+        if ($card->getClass() != null) {
+            foreach ($classes as $class) {
+                $currentclass = trim($card->getClass());
+                $selected[$class] = ($currentclass == $class)? "selected=\"selected\"" : "";
+            }
+        } else {
+            $selected["Neutral"] = "selected";
+        }
 
         if ($sent) {
             $card->setName($_POST["name"]);
@@ -24,10 +34,10 @@ if (admin()) {
                 redirect("cards.php");
             } else {
                 $errors = $card->getErrors();
-                show("views/updatecardform.php", "Edit card", array('card' => $card, 'errors' => $errors));
+                show("views/updatecardform.php", "Edit card", array('card' => $card, 'errors' => $errors, 'selected' => $selected));
             }
         } else {
-            show("views/updatecardform.php", "Edit card", array('card' => $card));
+            show("views/updatecardform.php", "Edit card", array('card' => $card, 'selected' => $selected));
         }
     }
     

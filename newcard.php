@@ -13,6 +13,16 @@ if (admin()) {
     $newcard->setHealth($_POST["health"]);
     $newcard->setAttack($_POST["attack"]);
     $sent = $_POST["sent"];
+    $classes = array("Warrior", "Paladin", "Hunter", "Shaman", "Rogue", "Druid", "Priest", "Warlock", "Mage", "Neutral");
+    $selected = array();
+    if ($newcard->getClass() != null) {
+            foreach ($classes as $class) {
+                $currentclass = trim($newcard->getClass());
+                $selected[$class] = ($currentclass == $class)? "selected=\"selected\"" : "";
+            }
+        } else {
+            $selected["Neutral"] = "selected";
+        }
 
     if ($sent) {
         if ($newcard->attributesCorrect()) {
@@ -21,10 +31,10 @@ if (admin()) {
             redirect("cards.php");
         } else {
             $errors = $newcard->getErrors();
-            show("views/newcardform.php", "New card", array('card' => $newcard, 'errors' => $errors));
+            show("views/newcardform.php", "New card", array('card' => $newcard, 'errors' => $errors, 'selected' => $selected));
         }
     } else {
-        show("views/newcardform.php", "New card", array());
+        show("views/newcardform.php", "New card", array('selected' => $selected));
     }
     
 } else {

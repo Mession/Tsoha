@@ -19,8 +19,17 @@
 </script>
 <div class="container">
     <h1>List of cards</h1>
-    <div class="input-group">
+    <div class="input-group" style="float:left">
         <input id="filter" type="text" class="form-control" placeholder="Filter results">
+    </div>
+    <div style="float:left">
+        <?php if (admin()): ?>
+            <a href="newcard.php">
+                <button class="btn btn-default" type="button">
+                    Create a new card
+                </button>
+            </a>
+        <?php endif; ?>
     </div>
     <table class="table table-striped">
         <thead>
@@ -41,6 +50,3 @@
         </tbody>
     </table>
 </div>
-<?php if (admin()): ?>
-<?php require_once 'views/newcard.php'; ?>
-<?php endif; ?>
