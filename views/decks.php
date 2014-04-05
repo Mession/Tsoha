@@ -34,7 +34,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Owner</th>
                 <th>Class</th>
@@ -42,19 +41,16 @@
         </thead>
         <tbody class="searchable">
             <tr>
-                <td>1</td>
                 <td><a href="decks/id.html">Deck.first.name</a></td>
                 <td><a href="users/id.html">User.name</a></td>
                 <td><p>Mage</p></td>
             </tr>
             <tr>
-                <td>2</td>
                 <td><a href="decks/id.html">Deck.second.name</a></td>
                 <td><a href="users/id.html">User.name</a></td>
                 <td><p>Warlock</p></td>
             </tr>
             <tr>
-                <td>3</td>
                 <td><a href="decks/id.html">jne.</a></td>
                 <td><a href="users/id.html">User.name</a></td>
                 <td><p>Rogue</p></td>
