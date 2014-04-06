@@ -29,9 +29,9 @@
             <?php foreach ($data->cards as $card): ?>
                 <tr>
                     <td>
-                        <a href="card.php?id=<?php echo $card->getId(); ?>"><?php echo $card->getName(); ?></a>
+                        <a href="card.php?id=<?php echo $card->getId(); ?>"><?php echo htmlspecialchars($card->getName()); ?></a>
                     </td>
-                    <td><?php echo $card->getClass(); ?></td>
+                    <td><?php echo htmlspecialchars($card->getClass()); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

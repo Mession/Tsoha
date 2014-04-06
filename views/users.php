@@ -22,7 +22,7 @@
         <tbody class="searchable">
             <?php foreach ($data->users as $user): ?>
                 <tr>
-                    <td><a href="user.php?id=<?php echo $user->getId() ?>"><?php echo $user->getName(); ?></a></td>
+                    <td><a href="user.php?id=<?php echo $user->getId() ?>"><?php echo htmlspecialchars($user->getName()); ?></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

@@ -1,6 +1,6 @@
 <div class="container">
-    <h1><?php echo $data->user->getName(); ?></h1>
-    <p>Decks made by <?php echo $data->user->getName(); ?>:</p>
+    <h1><?php echo htmlspecialchars($data->user->getName()); ?></h1>
+    <p>Decks made by <?php echo htmlspecialchars($data->user->getName()); ?>:</p>
     <ul>
         <li><a href="../decks/id.html">User.decks.first</a></li>
         <li><a href="../decks/id.html">User.decks.second</a></li>

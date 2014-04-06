@@ -1,11 +1,11 @@
 <div class="container">
-    <h1><?php echo $data->card->getName(); ?></h1>
+    <h1><?php echo htmlspecialchars($data->card->getName()); ?></h1>
     <?php if ($data->isweapon): ?>
-    <p><?php echo $data->card->getClass(); echo " weapon"; ?></p>
+    <p><?php echo htmlspecialchars($data->card->getClass()); echo " weapon"; ?></p>
     <?php else: ?>
-    <p><?php echo $data->card->getClass(); echo ($data->card->getAttack() == 0 && $data->card->getHealth() == 0)? " spell":" minion"; ?></p>
+    <p><?php echo htmlspecialchars($data->card->getClass()); echo ($data->card->getAttack() == 0 && $data->card->getHealth() == 0)? " spell":" minion"; ?></p>
     <?php endif; ?>
-    <p><?php echo $data->description; ?></p>
+    <p><?php echo htmlspecialchars($data->description); ?></p>
     <p>Mana cost: <?php echo $data->card->getManacost(); ?></p>
     <?php if ($data->card->getAttack() == 0 && $data->card->getHealth() == 0): ?>
     <?php elseif ($data->isweapon): ?>

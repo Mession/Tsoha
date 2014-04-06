@@ -3,7 +3,7 @@
     <form action="login.php" method="post">
         <div>
             <?php if (isset($data->user)): ?>
-                Username: <input type="text" name="username" value="<?php echo $data->user; ?>"><br>
+                Username: <input type="text" name="username" value="<?php echo htmlspecialchars($data->user); ?>"><br>
             <?php else: ?>
                 Username: <input type="text" name="username"><br>
             <?php endif; ?>
