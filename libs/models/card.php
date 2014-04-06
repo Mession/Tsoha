@@ -156,6 +156,15 @@ class Card {
 
     public function setManacost($manacost) {
         $this->manacost = $manacost;
+        if (!is_numeric($manacost)) {
+            $this->errors['manacost'] = "Mana cost should be a number";
+        } else if ($manacost < 0) {
+            $this->errors['manacost'] = "Mana cost cannot be negative";
+        } else if (!preg_match('/^\d+$/', $manacost)) {
+            $this->errors['manacost'] = "Mana cost should be an integer";
+        } else {
+            unset($this->errors['manacost']);
+        }
     }
 
     public function setClass($class) {
@@ -168,9 +177,27 @@ class Card {
 
     public function setAttack($attack) {
         $this->attack = $attack;
+        if (!is_numeric($attack)) {
+            $this->errors['attack'] = "Attack should be a number";
+        } else if ($attack < 0) {
+            $this->errors['attack'] = "Attack cannot be negative";
+        } else if (!preg_match('/^\d+$/', $attack)) {
+            $this->errors['attack'] = "Attack should be an integer";
+        } else {
+            unset($this->errors['attack']);
+        }
     }
 
     public function setHealth($health) {
         $this->health = $health;
+        if (!is_numeric($health)) {
+            $this->errors['health'] = "Health should be a number";
+        } else if ($health < 0) {
+            $this->errors['health'] = "Health cannot be negative";
+        } else if (!preg_match('/^\d+$/', $health)) {
+            $this->errors['health'] = "Health should be an integer";
+        } else {
+            unset($this->errors['health']);
+        }
     }
 }

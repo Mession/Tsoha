@@ -31,8 +31,17 @@
             <div class="alert alert-success"><?php echo $_SESSION['notice']; ?></div>
             <?php unset($_SESSION['notice']); ?>
         <?php endif; ?>
+        <?php if (!empty($data->errors)): ?>
+            <div class="alert alert-danger">
+                <?php foreach ($data->errors as $error): ?>
+                    <?php echo $error . "<br>"; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
         <?php if (!empty($data->error)): ?>
-            <div class="alert alert-danger"><?php echo $data->error; ?></div>
+            <div class="alert alert-danger">
+                <p><?php echo $data->error ?></p>
+            </div>
         <?php endif; ?>
         <?php require $page; ?>
     </body>
