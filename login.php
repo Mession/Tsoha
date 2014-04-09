@@ -24,6 +24,7 @@ if (loggedIn()) {
     $dbuser = User::findUserByNameAndPassword($user, $password);
 
     if (isset($dbuser)) {
+        $_SESSION['notice'] = "Welcome!";
         $_SESSION["user"] = $dbuser;
         $_SESSION["userid"] = $dbuser->getId();
         $_SESSION["name"] = $dbuser->getName();
