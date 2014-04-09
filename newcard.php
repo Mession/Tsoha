@@ -34,7 +34,7 @@ if (admin()) {
             show("views/newcardform.php", "New card", array('card' => $newcard, 'errors' => $errors, 'selected' => $selected));
         }
     } else {
-        show("views/newcardform.php", "New card", array('selected' => $selected));
+        show("views/newcardform.php", "New card", array('card' => $newcard, 'selected' => $selected));
     }
     
 } else {
