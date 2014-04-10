@@ -30,7 +30,7 @@
             <?php foreach ($data->decks as $deck): ?>
                 <tr>
                     <td><a href="deck.php?id=<?php echo $deck->getId() ?>"><?php echo htmlspecialchars($deck->getName()); ?></a></td>
-                    <td><a href="user.php?id=<?php echo $deck->getOwner() ?>"><?php echo htmlspecialchars(User::findUserById($deck->getId())->getName()); ?></a></td>
+                    <td><a href="user.php?id=<?php echo $deck->getOwner() ?>"><?php echo htmlspecialchars(User::findUserById($deck->getOwner())->getName()); ?></a></td>
                     <td><?php echo htmlspecialchars($deck->getClass()); ?></td>
                 </tr>
             <?php endforeach; ?>

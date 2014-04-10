@@ -60,7 +60,7 @@ class Deck {
     }
 
     public static function findAllDecks() {
-        $sql = "SELECT id, name, owner, class FROM deck ORDER BY name";
+        $sql = "SELECT id, name, owner, class FROM deck ORDER BY owner";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 

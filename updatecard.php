@@ -18,7 +18,7 @@ if (admin()) {
                 $selected[$class] = ($currentclass == $class)? "selected=\"selected\"" : "";
             }
         } else {
-            $selected["Neutral"] = "selected";
+            $selected["Neutral"] = "selected=\"selected\"";
         }
 
         if ($sent) {
