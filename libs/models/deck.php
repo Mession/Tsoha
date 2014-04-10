@@ -29,6 +29,22 @@ class Deck {
         }
     }
     
+    public static function findDecksByOwner($id) {
+        $sql = "SELECT id, name, owner, class FROM deck where owner = ? ORDER BY name";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($id));
+        
+        $tulokset = array();
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $deck = new Deck($tulos->id, $tulos->name, $tulos->owner, $tulos->class);
+
+            //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
+            //Se vastaa melko suoraan ArrayList:in add-metodia.
+            $tulokset[] = $deck;
+        }
+        return $tulokset;
+    }
+    
     public static function findDeckById($id) {
         $sql = "SELECT id, name, owner, class FROM deck where id = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);

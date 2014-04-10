@@ -2,7 +2,7 @@
 $site = explode('/',$_SERVER['REQUEST_URI']);
 $sitewithoutextension = explode('.',$site[2]);
 $id = (int)$_GET['id'];
-$sites = array("index", "cards", "decks", "users", "signup", "login", "user", "logout", "card");
+$sites = array("index", "cards", "decks", "users", "signup", "login", "user", "logout", "card", "deck");
 foreach ($sites as $onesite) {
     $active[$onesite] = ($sitewithoutextension[0] == $onesite)? "active":"noactive";
 }
@@ -14,4 +14,7 @@ if ($active["user"] == "active" && !loggedIn()) {
 } else if ($active["user"] == "active" && $id != $_SESSION["userid"]) {
     $active["users"] = "active";
     $active["user"] = "noactive";
+}
+if ($active["deck"] == "active") {
+    $active["decks"] = "active";
 }
