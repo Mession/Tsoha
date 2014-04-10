@@ -7,7 +7,7 @@
         <li><a href="../decks/id.html">jne.</a></li>
     </ul>
     <?php if ($_SESSION["userid"] == $data->user->getId()): ?>
-    <a href="id/edit.html">Change password</a>
-    <a href="id/destroy.php">Destroy</a>
+    <a href="updateuser.php?id=<?php echo $data->user->getId(); ?>">Change password</a>
+    <a href="destroyuser.php?id=<?php echo $data->user->getId(); ?>">Destroy</a>
     <?php endif; ?>
 </div>

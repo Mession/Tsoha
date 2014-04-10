@@ -157,6 +157,8 @@ class Card {
         $this->name = $name;
         if (trim($this->name) == "") {
             $this->errors['name'] = "Name cannot be blank";
+        } elseif (strlen($name) > 50) {
+            $this->errors['name'] = "Name cannot be over 50 characters long";
         } else {
             unset($this->errors['name']);
         }
@@ -177,10 +179,20 @@ class Card {
 
     public function setClass($class) {
         $this->class = $class;
+        if (strlen($class) > 15) {
+            $this->errors['class'] = "Class cannot be over 15 characters long";
+        } else {
+            unset($this->errors['class']);
+        }
     }
 
     public function setDescription($description) {
         $this->description = $description;
+        if (strlen($description) > 255) {
+            $this->errors['description'] = "Description cannot be over 255 characters long";
+        } else {
+            unset($this->errors['description']);
+        }
     }
 
     public function setAttack($attack) {

@@ -1,41 +1,73 @@
 <?php
 
 class User {
-  
-  private $id;
-  private $name;
-  private $password;
-  private $admin;
-  private $errors = array();
 
-  public function __construct($id, $name, $password, $admin) {
-    $this->id = $id;
-    $this->name = $name;
-    $this->password = $password;
-    $this->admin = $admin;
-  }
-  
-  public function attributesCorrect() {
+    private $id;
+    private $name;
+    private $password;
+    private $admin;
+    private $errors = array();
+
+    public function __construct($id, $name, $password, $admin) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->password = $password;
+        $this->admin = $admin;
+    }
+
+    public function attributesCorrect() {
         return empty($this->errors);
     }
-    
+
     public function getErrors() {
         return $this->errors;
     }
-  
-  public function insert() {
+
+    public function insert() {
         $sql = "INSERT INTO Player(name, password, admin) VALUES(?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
-        
+
         $ok = $kysely->execute(array($this->getName(), $this->getPassword(), $this->getAdmin()));
         if ($ok) {
             $this->id = $kysely->fetchColumn();
         }
         return $ok;
     }
-  
-  public static function findUserByName($username) {
-      $sql = "SELECT id, name, password, admin FROM player where name = ? LIMIT 1";
+    
+    public function update() {
+        $sql = "UPDATE Player SET name = ?, password = ? WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        echo $this->getName();
+        echo $this->getPassword();
+        echo $this->getAdmin();
+        echo $this->getId();
+        $kysely->execute(array($this->getName(), $this->getPassword(), $this->getId()));
+    }
+    
+    public function destroy() {
+        $sql = "DELETE from Player WHERE id = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getId()));
+    }
+    
+    public static function tableIsEmpty() {
+        $sql = "SELECT id, name, password, admin FROM Player ORDER BY name";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute();
+        
+        return $kysely->rowCount() == 0;
+    }
+    
+    public static function amount() {
+        $sql = "SELECT id, name, password, admin FROM Player ORDER BY name";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute();
+        
+        return $kysely->rowCount();
+    }
+
+    public static function findUserByName($username) {
+        $sql = "SELECT id, name, password, admin FROM player where name = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($username));
 
@@ -46,9 +78,9 @@ class User {
             $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
             return $user;
         }
-  }
-  
-  public static function findUserByNameAndPassword($username, $password) {
+    }
+
+    public static function findUserByNameAndPassword($username, $password) {
         $sql = "SELECT id, name, password, admin FROM player where name = ? AND password = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($username, $password));
@@ -61,7 +93,7 @@ class User {
             return $user;
         }
     }
-    
+
     public static function findUserById($id) {
         $sql = "SELECT id, name, password, admin FROM player where id = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -105,11 +137,11 @@ class User {
     public function getPassword() {
         return $this->password;
     }
-    
+
     public function getAdmin() {
         return $this->admin;
     }
-    
+
     public function setId($id) {
         $this->id = $id;
         if (!is_numeric($id)) {
@@ -122,26 +154,36 @@ class User {
             unset($this->errors['id']);
         }
     }
-    
+
     public function setName($name) {
         $this->name = $name;
         if (trim($this->name) == "") {
             $this->errors['name'] = "Name cannot be blank";
+        } elseif (strlen($name) > 20) {
+            $this->errors['name'] = "Name cannot be over 20 characters long";
         } else {
             unset($this->errors['name']);
         }
     }
-    
+
     public function setPassword($password) {
         $this->password = $password;
         if (trim($this->password) == "") {
             $this->errors['password'] = "Password cannot be blank";
+        } elseif (strlen($password) > 20) {
+            $this->errors['password'] = "Password cannot be over 20 characters long";
         } else {
             unset($this->errors['password']);
         }
     }
-    
+
     public function setAdmin($admin) {
         $this->admin = $admin;
+        if (!is_bool($admin)) {
+            $this->errors['admin'] = "Admin must be boolean";
+        } else {
+            unset($this->errors['admin']);
+        }
     }
+
 }
