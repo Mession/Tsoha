@@ -24,7 +24,7 @@ if (loggedIn()) {
     if ($sent) {
         if ($deck->attributesCorrect()) {
             $deck->insert();
-            $_SESSION['notice'] = "Deck was successfully added";
+            $_SESSION['notice'] = "Deck was successfully created, now go add some cards to it";
             redirect("decks.php");
         } else {
             $errors = $deck->getErrors();
