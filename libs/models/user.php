@@ -179,11 +179,6 @@ class User {
 
     public function setAdmin($admin) {
         $this->admin = $admin;
-        if (!is_bool($admin)) {
-            $this->errors['admin'] = "Admin must be boolean";
-        } else {
-            unset($this->errors['admin']);
-        }
     }
 
 }
