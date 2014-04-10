@@ -2,7 +2,7 @@
 $site = explode('/',$_SERVER['REQUEST_URI']);
 $sitewithoutextension = explode('.',$site[2]);
 $id = (int)$_GET['id'];
-$sites = array("index", "cards", "decks", "users", "signup", "login", "user", "logout", "card", "deck", "newcard", "updatecard", "destroycard", "newdeck", "updatedeck", "destroydeck", "updateuser", "destroyuser");
+$sites = array("index", "cards", "decks", "users", "signup", "login", "user", "logout", "card", "deck", "newcard", "updatecard", "destroycard", "newdeck", "updatedeck", "destroydeck", "updateuser", "destroyuser", "addcards", "removecard");
 foreach ($sites as $onesite) {
     $active[$onesite] = ($sitewithoutextension[0] == $onesite)? "active":"noactive";
 }
@@ -17,6 +17,6 @@ if ($active["user"] == "active" && !loggedIn()) {
 } else if ($active["updateuser"] == "active" || $active["destroyuser"] == "active") {
     $active["user"] = "active";
 }
-if ($active["deck"] == "active" || $active["newdeck"] == "active" || $active["updatedeck"] == "active" || $active["destroydeck"] == "active") {
+if ($active["deck"] == "active" || $active["newdeck"] == "active" || $active["updatedeck"] == "active" || $active["destroydeck"] == "active" || $active["addcards"] == "active" || $active["removecard"] == "active") {
     $active["decks"] = "active";
 }

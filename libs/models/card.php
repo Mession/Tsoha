@@ -48,6 +48,30 @@ class Card {
             return $card;
         }
     }
+    
+    public static function trimClass() {
+        $cards = Card::findAllCards();
+        foreach ($cards as $card) {
+            $card->setClass(trim($card->getClass()));
+            $card->update();
+        }
+    }
+    
+    public static function findAllCardsByClassIncludeNeutrals($class) {
+        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card WHERE class = ? or class = ? ORDER BY name";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($class, "Neutral"));
+
+        $tulokset = array();
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $card = new Card($tulos->id, $tulos->name, $tulos->manacost, $tulos->class, $tulos->description, $tulos->attack, $tulos->health);
+
+            //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
+            //Se vastaa melko suoraan ArrayList:in add-metodia.
+            $tulokset[] = $card;
+        }
+        return $tulokset;
+    }
 
     public static function findAllCards() {
         $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY name";
@@ -104,6 +128,14 @@ class Card {
         return $kysely->rowCount();
     }
     
+    public static function amountByClassIncludeNeutrals($class) {
+        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card WHERE class = ? or class = ? ORDER BY name";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($class, "Neutral"));
+        
+        return $kysely->rowCount();
+    }
+    
     public function attributesCorrect() {
         return empty($this->errors);
     }
@@ -154,7 +186,7 @@ class Card {
     }
 
     public function setName($name) {
-        $this->name = $name;
+        $this->name = trim($name);
         if (trim($this->name) == "") {
             $this->errors['name'] = "Name cannot be blank";
         } elseif (strlen($name) > 50) {
@@ -178,7 +210,7 @@ class Card {
     }
 
     public function setClass($class) {
-        $this->class = $class;
+        $this->class = trim($class);
         if (strlen($class) > 15) {
             $this->errors['class'] = "Class cannot be over 15 characters long";
         } else {

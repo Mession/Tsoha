@@ -17,7 +17,7 @@
     </div>
     <div style="float:left">
         <?php if ($data->deck->getOwner() == $_SESSION["userid"]): ?>
-            <a href="addcards.php">
+            <a href="addcards.php?id=<?php echo $data->deck->getId(); ?>">
                 <button class="btn btn-default" type="button">
                     Add cards to this deck
                 </button>
@@ -36,6 +36,9 @@
                 <tr>
                     <td>
                         <a href="card.php?id=<?php echo $card->getId(); ?>"><?php echo htmlspecialchars($card->getName()); ?></a>
+                        <?php if ($data->deck->getOwner() == $_SESSION["userid"]): ?>
+                            <a href="removecard.php?id=<?php echo $data->deck->getId(); ?>&cid=<?php echo $card->getId(); ?>" <span class="glyphicon glyphicon-remove" style="color:black"></span>
+                        <?php endif; ?>
                     </td>
                     <td><?php echo htmlspecialchars($card->getClass()); ?></td>
                 </tr>

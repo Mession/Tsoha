@@ -83,6 +83,14 @@ class Deck {
         return $tulokset;
     }
     
+    public static function trimClass() {
+        $decks = Deck::findAllDecks();
+        foreach ($decks as $deck) {
+            $deck->setClass(trim($deck->getClass()));
+            $deck->update();
+        }
+    }
+    
     public function insert() {
         $sql = "INSERT INTO Deck(name, owner, class) VALUES(?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -144,7 +152,7 @@ class Deck {
     }
     
     public function setName($name) {
-        $this->name = $name;
+        $this->name = trim($name);
         if (trim($this->name) == "") {
             $this->errors['name'] = "Name cannot be blank";
         } elseif (strlen($name) > 20) {
@@ -168,7 +176,7 @@ class Deck {
     }
     
     public function setClass($class) {
-        $this->class = $class;
+        $this->class = trim($class);
         if (strlen($class) > 15) {
             $this->errors['class'] = "Class cannot be over 15 characters long";
         } else {

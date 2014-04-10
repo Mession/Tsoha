@@ -45,4 +45,6 @@
         <?php endif; ?>
         <?php require $page; ?>
     </body>
+    <br>
+    <br>
 </html>
