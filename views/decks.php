@@ -3,6 +3,8 @@
     <h1>List of decks</h1>
     <?php if ($data->amount == 0): ?>
         <h5>No decks in the database</h5>
+    <?php elseif ($data->amount == 1): ?>
+        <h5>1 deck in the database</h5>
     <?php else: ?>
         <h5><?php echo $data->amount ?> decks in the database</h5>
     <?php endif; ?>

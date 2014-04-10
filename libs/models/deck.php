@@ -45,6 +45,14 @@ class Deck {
         return $tulokset;
     }
     
+    public static function amountByOwner($id) {
+        $sql = "SELECT id, name, owner, class FROM deck where owner = ? ORDER BY name";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($id));
+         
+        return $kysely->rowCount();
+    }
+    
     public static function findDeckById($id) {
         $sql = "SELECT id, name, owner, class FROM deck where id = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);

@@ -3,6 +3,8 @@
     <h1>List of users</h1>
     <?php if ($data->amount == 0): ?>
         <h5>No users in the database</h5>
+    <?php elseif ($data->amount == 1): ?>
+        <h5>1 user in the database</h5>
     <?php else: ?>
         <h5><?php echo $data->amount ?> users in the database</h5>
     <?php endif; ?>
