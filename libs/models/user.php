@@ -180,5 +180,4 @@ class User {
     public function setAdmin($admin) {
         $this->admin = $admin;
     }
-
 }
