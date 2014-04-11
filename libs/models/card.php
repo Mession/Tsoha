@@ -235,11 +235,11 @@ class Card {
     public function setHealth($health) {
         $this->health = $health;
         if (!is_numeric($health)) {
-            $this->errors['health'] = "Health should be a number";
+            $this->errors['health'] = "Health or durability should be a number";
         } else if ($health < 0) {
-            $this->errors['health'] = "Health cannot be negative";
+            $this->errors['health'] = "Health or durability cannot be negative";
         } else if (!preg_match('/^\d+$/', $health)) {
-            $this->errors['health'] = "Health should be an integer";
+            $this->errors['health'] = "Health or durability should be an integer";
         } else {
             unset($this->errors['health']);
         }

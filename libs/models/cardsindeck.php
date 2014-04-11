@@ -147,5 +147,12 @@ class CardsInDeck {
         } else {
             unset($this->errors['cid']);
         }
+        $cardclass = Card::findCardById($card_id)->getClass();
+        $deckclass = Deck::findDeckById($this->deck_id)->getClass();
+        if ($cardclass != "Neutral" && $cardclass != $deckclass) {
+            $this->errors['cid'] = "Card should be from the neutral or the " . strtolower($deckclass) . " class";
+        } else {
+            unset($this->errors['cid']);
+        }
     }
 }
