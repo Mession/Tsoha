@@ -10,6 +10,8 @@ if (admin()) {
         redirect("cards.php");
     } else {
         $sent = $_POST["sent"];
+        
+        // katsotaan, minkä luokan pitäisi olla valittuna defaulttina muokkauslomakkeessa
         $classes = array("Warrior", "Paladin", "Hunter", "Shaman", "Rogue", "Druid", "Priest", "Warlock", "Mage", "Neutral");
         $selected = array();
         if ($card->getClass() != null) {
@@ -37,6 +39,7 @@ if (admin()) {
                 show("views/updatecardform.php", "Edit card", array('card' => $card, 'errors' => $errors, 'selected' => $selected));
             }
         } else {
+            // ensimmäisellä kerralla ei näytetä virheviestejä
             show("views/updatecardform.php", "Edit card", array('card' => $card, 'selected' => $selected));
         }
     }

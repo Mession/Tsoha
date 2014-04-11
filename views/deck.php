@@ -2,6 +2,7 @@
 <script type="text/javascript" src="js/filter.js"></script>
 <div class="container">
     <h1><?php echo htmlspecialchars($data->deck->getName()); ?></h1>
+    <!-- Kerrotaan pakan tietoja -->
     <p>
         This <?php echo htmlspecialchars(strtolower($data->deck->getClass())); ?> deck was made by <a href="user.php?id=<?php echo $data->deck->getOwner() ?>"><?php echo htmlspecialchars(User::findUserById($data->deck->getOwner())->getName()); ?></a>
         <?php if ($data->amount == 0): ?>
@@ -12,9 +13,8 @@
             and has <?php echo $data->amount ?> cards
         <?php endif; ?>
     </p>
-    <div class="input-group" style="float:left">
-        <input id="filter" type="text" class="form-control" placeholder="Filter results">
-    </div>
+    <?php require "views/filter.php"; ?>
+    <!-- Nappi, joka vie korttien lisäämissivulle -->
     <div style="float:left">
         <?php if ($data->deck->getOwner() == $_SESSION["userid"]): ?>
             <a href="addcards.php?id=<?php echo $data->deck->getId(); ?>">
@@ -24,6 +24,7 @@
             </a>
         <?php endif; ?>
     </div>
+    <!-- Taulukko, jossa näkyy pakan kortteja -->
     <table class="table table-striped">
         <thead>
             <tr>
@@ -45,7 +46,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    
+    <!-- Pakan omistajalle näytetään lisäksi pakan muokkaus ja poisto -napit -->
     <?php if ($data->deck->getOwner() == $_SESSION["userid"]): ?>
     <a href="updatedeck.php?id=<?php echo $data->deck->getId(); ?>">Change name</a>
     <a href="destroydeck.php?id=<?php echo $data->deck->getId(); ?>" onclick="return confirmDelete()">Destroy</a>

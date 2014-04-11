@@ -9,6 +9,7 @@ if ($card == null) {
     $_SESSION['error'] = "Card doesn't exist";
     redirect("cards.php");
 } else {
+    // tarkistetaan, onko kortti ase, ja jos on, lyhennetään kuvausta (tieto siitä, onko kortti ase, on tallennettuna kuvaukseen)
     $weaponcheck = str_split($card->getDescription(), 6);
     $isweapon = false;
     $description = $card->getDescription();

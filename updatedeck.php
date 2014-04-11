@@ -22,6 +22,7 @@ if ($deck == null) {
             show("views/updatedeckform.php", "New deck", array('deck' => $deck, 'errors' => $errors, 'selected' => $selected));
         }
     } else {
+        // ensimmäisellä kerralla ei näytetä virheitä
         show("views/updatedeckform.php", "New deck", array('deck' => $deck, 'selected' => $selected));
     }
 } elseif(loggedIn()) {

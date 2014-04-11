@@ -10,6 +10,7 @@ if (loggedIn()) {
     $deck->setClass($_POST["class"]);
     $deck->setOwner($_SESSION["userid"]);
     $sent = $_POST["sent"];
+    // etsitään, minkä luokan pitäisi olla valittuna defaulttina lisäyslomakkeessa (säilyttää tiedon epäonnistuneen yrityksen jälkeen)
     $classes = array("Warrior", "Paladin", "Hunter", "Shaman", "Rogue", "Druid", "Priest", "Warlock", "Mage");
     $selected = array();
     if ($deck->getClass() != null) {
@@ -31,6 +32,7 @@ if (loggedIn()) {
             show("views/newdeckform.php", "New deck", array('deck' => $deck, 'errors' => $errors, 'selected' => $selected));
         }
     } else {
+        // ensimmäisellä kerralla ei näytetä virheviestejä
         show("views/newdeckform.php", "New deck", array('deck' => $deck, 'selected' => $selected));
     }
     

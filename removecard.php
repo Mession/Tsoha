@@ -16,7 +16,7 @@ if (loggedIn()) {
     } else {
         $cid = $_GET["cid"];
         if (isset($cid)) {
-            // add card to the deck
+            // yritetään poistaa kortti
             $card = Card::findCardById($cid);
             if ($card == null) {
                 $_SESSION['error'] = "Card doesn't exist";
@@ -27,6 +27,7 @@ if (loggedIn()) {
                 $_SESSION['error'] = "That card wasn't in the deck";
                 redirect("deck.php?id=" . $deck->getId());
             } else {
+                // tuhotaan yksi tietoalkio liitostaulusta, eli pakassa on tästä lähin tätä tiettyä korttia yksi vähemmän
                 $cardsindeck->destroy();
                 $_SESSION['notice'] = "Card was successfully removed from the deck";
                 redirect("deck.php?id=" . $deck->getId());

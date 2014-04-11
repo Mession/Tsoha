@@ -13,14 +13,16 @@ if (!loggedIn()) {
         if (empty($user)) {
             show("views/signup.php", "Sign up", array('user' => $user, 'error' => "You must fill in a username"));
         } elseif (empty($password)) {
-            show("views/signup.php", "Login", array('user' => $user, 'error' => "You must fill in a password"));
+            show("views/signup.php", "Sign up", array('user' => $user, 'error' => "You must fill in a password"));
         }
     } else {
+        // ensimmäisellä kerralla ei näytetä virheviestejä
         show("views/signup.php", "Sign up", array());
     }
     
     $dbuser = User::findUserByName($user);
     if (isset($dbuser)) {
+        // käyttäjänimen pitää olla uniikki
         show("views/signup.php", "Sign up", array('user' => $user, 'error' => "A user with that name already exists"));
     } else {
         $dbuser = new User();

@@ -83,6 +83,7 @@ class Deck {
         return $tulokset;
     }
     
+    // apumetodi, jolla jokaisen pakan luokan nimi trimmataan (joskus luokat näyttävät randomisti tallentuvan ylimääräisten välien kanssa)
     public static function trimClass() {
         $decks = Deck::findAllDecks();
         foreach ($decks as $deck) {
@@ -115,11 +116,7 @@ class Deck {
     }
     
     public static function tableIsEmpty() {
-        $sql = "SELECT id, name, owner, class FROM Deck ORDER BY name";
-        $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute();
-        
-        return $kysely->rowCount() == 0;
+        return Deck::amount() == 0;
     }
     
     public static function amount() {

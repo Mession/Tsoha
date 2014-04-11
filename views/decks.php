@@ -1,6 +1,7 @@
 <script type="text/javascript" src="js/filter.js"></script>
 <div class="container">
     <h1>List of decks</h1>
+    <!-- Kerrotaan käyttäjälle, kuinka monta pakkaa tietokannassa on -->
     <?php if ($data->amount == 0): ?>
         <h5>No decks in the database</h5>
     <?php elseif ($data->amount == 1): ?>
@@ -8,18 +9,9 @@
     <?php else: ?>
         <h5><?php echo $data->amount ?> decks in the database</h5>
     <?php endif; ?>
-    <div class="input-group" style="float:left">
-        <input id="filter" type="text" class="form-control" placeholder="Filter results">
-    </div>
-    <div style="float:left">
-        <?php if (loggedIn()): ?>
-            <a href="newdeck.php">
-                <button class="btn btn-default" type="button">
-                    Create a new deck
-                </button>
-            </a>
-        <?php endif; ?>
-    </div>
+    <?php require "views/filter.php"; ?>
+    <?php require "views/newdeckbutton.php"; ?>
+    <!-- Taulukko, jossa näkyy tietokannassa olevat pakat -->
     <table class="table table-striped">
         <thead>
             <tr>

@@ -23,6 +23,7 @@
     <body>
         <?php require_once "libs/navbaractivetab.php"; ?>
         <?php require "navbar.php"; ?>
+        <!-- Näytetään käyttäjälle mahdollisia virhe- ja muita viestejä -->
         <?php if (!empty($_SESSION['error'])): ?>
             <div class="alert alert-danger"><?php echo $_SESSION['error']; ?></div>
             <?php unset($_SESSION['error']); ?>

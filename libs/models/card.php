@@ -49,6 +49,7 @@ class Card {
         }
     }
     
+    // apumetodi, joka pitää suorittaa aina, kun kortit tuodaan jsonista, eli populate.php:n jälkeen (muuten luokat eivät toimi)
     public static function trimClass() {
         $cards = Card::findAllCards();
         foreach ($cards as $card) {
@@ -57,6 +58,7 @@ class Card {
         }
     }
     
+    // etsitään kaikki tietyn luokan kortit + neutral kortit, jotta nämä voidaan tarjota käyttäjälle pakkaan
     public static function findAllCardsByClassIncludeNeutrals($class) {
         $sql = "SELECT id, name, manacost, class, description, attack, health FROM card WHERE class = ? or class = ? ORDER BY name";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -65,9 +67,6 @@ class Card {
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
             $card = new Card($tulos->id, $tulos->name, $tulos->manacost, $tulos->class, $tulos->description, $tulos->attack, $tulos->health);
-
-            //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
-            //Se vastaa melko suoraan ArrayList:in add-metodia.
             $tulokset[] = $card;
         }
         return $tulokset;
@@ -81,9 +80,6 @@ class Card {
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
             $card = new Card($tulos->id, $tulos->name, $tulos->manacost, $tulos->class, $tulos->description, $tulos->attack, $tulos->health);
-
-            //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
-            //Se vastaa melko suoraan ArrayList:in add-metodia.
             $tulokset[] = $card;
         }
         return $tulokset;
@@ -113,11 +109,7 @@ class Card {
     }
     
     public static function tableIsEmpty() {
-        $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY name";
-        $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute();
-        
-        return $kysely->rowCount() == 0;
+        return Card::amount() == 0;
     }
     
     public static function amount() {

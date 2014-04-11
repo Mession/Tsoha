@@ -1,6 +1,7 @@
 <script type="text/javascript" src="js/filter.js"></script>
 <div class="container">
     <h1>Add cards</h1>
+    <!-- Kerrotaan käyttäjälle, kuinka monta sellaista korttia, jotka käyttäjä voisi lisätä pakkaansa kortin luokan puolesta, tietokannassa on -->
     <?php if ($data->amount == 0): ?>
         <h5>No cards in the database</h5>
     <?php elseif ($data->amount == 1): ?>
@@ -8,18 +9,8 @@
     <?php else: ?>
         <h5>There are <?php echo $data->amount ?> cards you could add to your deck</h5>
     <?php endif; ?>
-    <div class="input-group" style="float:left">
-        <input id="filter" type="text" class="form-control" placeholder="Filter results">
-    </div>
-    <div style="float:left">
-        <?php if (admin()): ?>
-            <a href="newcard.php">
-                <button class="btn btn-default" type="button">
-                    Create a new card
-                </button>
-            </a>
-        <?php endif; ?>
-    </div>
+    <?php require "views/filter.php"; ?>
+    <!-- Taulukko, jossa näkyy kortteja, jotka sopivat pakkaan luokan puolesta -->
     <table class="table table-striped">
         <thead>
             <tr>

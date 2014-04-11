@@ -37,10 +37,6 @@ class User {
     public function update() {
         $sql = "UPDATE Player SET name = ?, password = ? WHERE id = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
-        echo $this->getName();
-        echo $this->getPassword();
-        echo $this->getAdmin();
-        echo $this->getId();
         $kysely->execute(array($this->getName(), $this->getPassword(), $this->getId()));
     }
     
@@ -51,11 +47,7 @@ class User {
     }
     
     public static function tableIsEmpty() {
-        $sql = "SELECT id, name, password, admin FROM Player ORDER BY name";
-        $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute();
-        
-        return $kysely->rowCount() == 0;
+        return User::amount() == 0;
     }
     
     public static function amount() {
@@ -116,15 +108,10 @@ class User {
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
             $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
-
-            //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
-            //Se vastaa melko suoraan ArrayList:in add-metodia.
             $tulokset[] = $user;
         }
         return $tulokset;
     }
-
-    /* Tähän gettereitä ja settereitä */
 
     public function getId() {
         return $this->id;

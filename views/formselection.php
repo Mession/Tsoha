@@ -1,3 +1,4 @@
+<!-- Kortin lisäys- ja muokkauspohja -->
 Card name: <input type="text" name="name" value="<?php echo htmlspecialchars($data->card->getName()); ?>"><br>
 Class: <select name="class">
     <option value="Warrior" <?php echo $data->selected["Warrior"] ?>>Warrior</option>

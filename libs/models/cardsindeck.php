@@ -14,6 +14,7 @@ class CardsInDeck {
         $this->card_id = $card_id;
     }
     
+    // kuinka monta tiettyä korttia on pakassa, tällä tarkistetaan, ettei samaa korttia ole yli kahta kertaa samassa pakassa
     public static function howManySpecificCardsInDeck($did, $cid) {
         $sql = "SELECT id, deck_id, card_id FROM cardsindeck where deck_id = ? and card_id = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -22,6 +23,7 @@ class CardsInDeck {
         return $kysely->rowCount();
     }
     
+    // etsitään yhden pakan kaikki kortit
     public static function findCardsByDeckId($id) {
         $sql = "SELECT id, deck_id, card_id FROM cardsindeck where deck_id = ? ORDER BY card_id";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -38,6 +40,7 @@ class CardsInDeck {
         return $tulokset;
     }
     
+    // etsitään yksittäinen tietoalkio tietokannasta
     public static function findEntryByDeckAndCardId($id, $cid) {
         $sql = "SELECT id, deck_id, card_id FROM cardsindeck where deck_id = ? and card_id = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -52,6 +55,7 @@ class CardsInDeck {
         }
     }
     
+    // pakan koko
     public static function amountOfCardsInDeckByDeckId($id) {
         $sql = "SELECT id, deck_id, card_id FROM cardsindeck where deck_id = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -60,6 +64,7 @@ class CardsInDeck {
         return $kysely->rowCount();
     }
     
+    // onko pakka täynnä
     public static function deckIsFull($id) {
         if (CardsInDeck::amountOfCardsInDeckByDeckId($id) == 30) {
             return true;
@@ -133,7 +138,6 @@ class CardsInDeck {
 
     public function setCard_id($card_id) {
         $this->card_id = $card_id;
-        
         if (!is_numeric($card_id)) {
             $this->errors['cid'] = "Card id should be a number";
         } else if ($card_id <= 0) {

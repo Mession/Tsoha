@@ -1,4 +1,5 @@
 <?php
+// Etsitään urlin perusteella, minkä navigointipalkin linkin tulisi näkyä aktiivisena
 $site = explode('/',$_SERVER['REQUEST_URI']);
 $sitewithoutextension = explode('.',$site[2]);
 $id = (int)$_GET['id'];
@@ -6,6 +7,7 @@ $sites = array("index", "cards", "decks", "users", "signup", "login", "user", "l
 foreach ($sites as $onesite) {
     $active[$onesite] = ($sitewithoutextension[0] == $onesite)? "active":"noactive";
 }
+// "Poikkeukset", eli tapaukset, joissa url ei vastaa navbarin linkin nimeä
 if ($active["card"] == "active" || $active["newcard"] == "active" || $active["updatecard"] == "active" || $active["destroycard"] == "active") {
     $active["cards"] = "active";
 }
