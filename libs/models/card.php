@@ -26,13 +26,7 @@ class Card {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($name));
 
-        $tulos = $kysely->fetchObject();
-        if ($tulos == null) {
-            return null;
-        } else {
-            $card = new Card($tulos->id, $tulos->name, $tulos->manacost, $tulos->class, $tulos->description, $tulos->attack, $tulos->health);
-            return $card;
-        }
+        return Card::extractCardFromSQL($kysely);
     }
     
     public static function findCardById($id) {
@@ -40,6 +34,10 @@ class Card {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($id));
 
+        return Card::extractCardFromSQL($kysely);
+    }
+    
+    public static function extractCardFromSQL($kysely) {
         $tulos = $kysely->fetchObject();
         if ($tulos == null) {
             return null;
@@ -64,19 +62,18 @@ class Card {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($class, "Neutral"));
 
-        $tulokset = array();
-        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $card = new Card($tulos->id, $tulos->name, $tulos->manacost, $tulos->class, $tulos->description, $tulos->attack, $tulos->health);
-            $tulokset[] = $card;
-        }
-        return $tulokset;
+        return Card::extractCardsFromSQL($kysely);
     }
 
     public static function findAllCards() {
         $sql = "SELECT id, name, manacost, class, description, attack, health FROM card ORDER BY name";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
-
+        
+        return Card::extractCardsFromSQL($kysely);
+    }
+    
+    public static function extractCardsFromSQL($kysely) {
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
             $card = new Card($tulos->id, $tulos->name, $tulos->manacost, $tulos->class, $tulos->description, $tulos->attack, $tulos->health);

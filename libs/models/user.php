@@ -63,13 +63,7 @@ class User {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($username));
 
-        $tulos = $kysely->fetchObject();
-        if ($tulos == null) {
-            return null;
-        } else {
-            $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
-            return $user;
-        }
+        return User::extractUserFromSQL($kysely);
     }
 
     public static function findUserByNameAndPassword($username, $password) {
@@ -77,13 +71,7 @@ class User {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($username, $password));
 
-        $tulos = $kysely->fetchObject();
-        if ($tulos == null) {
-            return null;
-        } else {
-            $user = new User($tulos->id, $tulos->name, $tulos->password, $tulos->admin);
-            return $user;
-        }
+        return User::extractUserFromSQL($kysely);
     }
 
     public static function findUserById($id) {
@@ -91,6 +79,10 @@ class User {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($id));
 
+        return User::extractUserFromSQL($kysely);
+    }
+    
+    public static function extractUserFromSQL($kysely) {
         $tulos = $kysely->fetchObject();
         if ($tulos == null) {
             return null;

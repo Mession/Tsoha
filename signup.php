@@ -32,12 +32,9 @@ if (!loggedIn()) {
         if ($dbuser->attributesCorrect()) {
             $dbuser->insert();
             $_SESSION['notice'] = "Welcome!";
-            $_SESSION["user"] = $dbuser;
-            $_SESSION["userid"] = $dbuser->getId();
-            $_SESSION["name"] = $dbuser->getName();
-            $_SESSION["admin"] = $dbuser->getAdmin();
+            login($dbuser);
             $title = "Home";
-            header('Location: index.php');
+            redirect("index.php");
         } else {
             $errors = $dbuser->getErrors();
             show("views/signup.php", "Sign up", array('user' => $user, 'errors' => $errors));

@@ -13,15 +13,6 @@ function redirect($page) {
     header('Location: ' . $page);
 }
 
-function showOnlyIfLoggedIn($page, $title, $data = array()) {
-    $data = (object) $data;
-    if (loggedIn()) {
-        show($page, $title, array());
-    } else {
-        show("views/login.php", "Login", array('error' => "You should be logged in"));
-    }
-}
-
 function loggedIn() {
     return isset($_SESSION["user"]);
 }
@@ -31,4 +22,18 @@ function admin() {
         return false;
     }
     return $_SESSION["admin"];
+}
+
+function logout() {
+    unset($_SESSION["user"]);
+    unset($_SESSION["userid"]);
+    unset($_SESSION["name"]);
+    unset($_SESSION["admin"]);
+}
+
+function login($user) {
+    $_SESSION["user"] = $user;
+    $_SESSION["userid"] = $user->getId();
+    $_SESSION["name"] = $user->getName();
+    $_SESSION["admin"] = $user->getAdmin();
 }

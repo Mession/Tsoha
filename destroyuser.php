@@ -9,10 +9,7 @@ if ($user == null) {
     redirect("users.php");
 } elseif (loggedIn() && $_SESSION["userid"] == $id) {
     $user->destroy();
-    unset($_SESSION["user"]);
-    unset($_SESSION["userid"]);
-    unset($_SESSION["name"]);
-    unset($_SESSION["admin"]);
+    logout();
     $_SESSION['notice'] = "User was successfully destroyed";
     redirect("users.php");
 } else {

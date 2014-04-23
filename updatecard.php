@@ -43,7 +43,6 @@ if (admin()) {
             show("views/updatecardform.php", "Edit card", array('card' => $card, 'selected' => $selected));
         }
     }
-    
 } else {
     $_SESSION['error'] = "You don't have permission to do that";
     redirect("cards.php");

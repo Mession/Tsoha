@@ -24,13 +24,10 @@ if (loggedIn()) {
     $dbuser = User::findUserByNameAndPassword($user, $password);
 
     if (isset($dbuser)) {
-        $_SESSION['notice'] = "Welcome!";
-        $_SESSION["user"] = $dbuser;
-        $_SESSION["userid"] = $dbuser->getId();
-        $_SESSION["name"] = $dbuser->getName();
-        $_SESSION["admin"] = $dbuser->getAdmin();
+        $_SESSION['notice'] = "Welcome back!";
+        login($dbuser);
         $title = "Home";
-        header('Location: index.php');
+        redirect("index.php");
     } else {
         show("views/login.php", "Login", array('user' => $user, 'error' => "Wrong username or password"));
     }

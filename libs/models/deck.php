@@ -15,20 +15,6 @@ class Deck {
         $this->class = $class;
     }
     
-    public static function findDeckByName($name) {
-        $sql = "SELECT id, name, owner, class FROM deck where name = ? LIMIT 1";
-        $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute(array($name));
-
-        $tulos = $kysely->fetchObject();
-        if ($tulos == null) {
-            return null;
-        } else {
-            $card = new Deck($tulos->id, $tulos->name, $tulos->owner, $tulos->class);
-            return $card;
-        }
-    }
-    
     public static function findDecksByOwner($id) {
         $sql = "SELECT id, name, owner, class FROM deck where owner = ? ORDER BY name";
         $kysely = getTietokantayhteys()->prepare($sql);
