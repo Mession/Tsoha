@@ -10,6 +10,13 @@
         <h5>There are <?php echo $data->amount ?> cards you could add to your deck</h5>
     <?php endif; ?>
     <?php require "views/filter.php"; ?>
+    <div style="float:left">
+        <a href="deck.php?id=<?php echo $data->deck->getId(); ?>">
+            <button class="btn btn-default" type="button">
+                Back to deck
+            </button>
+        </a>
+    </div>
     <!-- Taulukko, jossa näkyy kortteja, jotka sopivat pakkaan luokan puolesta -->
     <table class="table table-striped">
         <thead>
